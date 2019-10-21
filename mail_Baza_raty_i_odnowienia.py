@@ -112,7 +112,7 @@ class MailingRaty:
             msg_full = mail.as_string().encode('utf-8')
             server = smtplib.SMTP('ubezpieczenia-magro.home.pl:25')
             server.starttls()
-            server.login('przypomnienia@ubezpieczenia-magro.pl', 'dsrhsR3P')
+            server.login('przypomnienia@ubezpieczenia-magro.pl', 'passw')
             server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email], msg_full)
             server.quit()
             print()
