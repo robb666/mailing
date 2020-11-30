@@ -6,7 +6,7 @@ import re
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from l_h_mailing.py import passw
+# from l_h_mailing.py import passw
 
 start_time = time.time()
 
@@ -17,14 +17,15 @@ class MailingRaty:
 
     def __init__(self):
         self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsx", read_only=True)
+        # self.wb = load_workbook(filename="C:/Users/ROBERT/Desktop/2014 BAZA MAGRO.xlsx", read_only=True)
         self.ws = self.wb['BAZA 2014']
-        self.cells = self.ws['T8000':'BA20000']
+        self.cells = self.ws['T9800':'BA24000']
         today = date.today()
         self.week_period = today - timedelta(-5)
 
     def read_excel(self):
         for email, j1, j2, marka, model, nr_rej, rok_prod, SU, j3, j4, j5, pocz, j7, j8, j9, j10, j11, j12, tu, \
-            rodz_ub, nr_polisy, j16, j17, j18, j19, j20, j21, j22, j23, data_raty, kwota, j26, j27, nr_raty \
+            rodz_ub, nr_polisy, j16, j17, j18, j19, j20, j21, j22, przypis, data_raty, kwota, j26, j27, nr_raty \
                 in self.cells:
             self.data_raty = data_raty.value
             self.kwota = kwota.value
@@ -42,6 +43,7 @@ class MailingRaty:
             if self.rok_prod is None:
                 self.rok_prod = 'b/d'
             self.tu = tu.value
+            self.rodz_ub = rodz_ub.value
             self.nr_polisy = nr_polisy.value
             self.email = email.value
 
@@ -55,17 +57,17 @@ class MailingRaty:
                 self.termin_płatności = data_r[:10]
                 if datetime.datetime.strptime(str(self.termin_płatności), '%Y-%m-%d').date() == self.week_period and \
                         int(self.nr_raty.value) > 1:
-                    if self.email is not None:
+                    if self.email is not None and self.rodz_ub != 'życ':
                         di = {'ALL': 'Allianz', 'AXA': 'AXA', 'COM': 'Compensa', 'EPZU': 'PZU', 'GEN': 'Generali',
                               'GOT': 'Gothaer', 'HDI': 'HDI', 'HES': 'Ergo Hestia', 'IGS': 'IGS', 'INT': 'INTER',
-                              'LIN': 'LINK 4', 'PRO': 'Proama', 'PZU': 'PZU', 'RIS': 'InterRisk', 'TUW': 'TUW',
-                              'TUZ': 'TUZ', 'UNI': 'Uniqa', 'WAR': 'Warta', 'WIE': 'Wiener'}
+                              'LIN': 'LINK 4', 'MTU': 'MTU', 'PRO': 'Proama', 'PZU': 'PZU', 'RIS': 'InterRisk', 'TUW': 'TUW',
+                              'TUZ': 'TUZ', 'UNI': 'Uniqa', 'WAR': 'Warta', 'WIE': 'Wiener', 'YCD': 'You Can Drive'}
                         self.tu = di.get(self.tu)
 
                         yield self.termin_płatności
 
     def iterate_funct(self):
-        for i in self.select_cells():
+        for _ in self.select_cells():
             print()
             print('Data raty: ' + str(self.termin_płatności))
             print('Marka/kod poczt: ' + str(self.marka))
@@ -85,16 +87,16 @@ class MailingRaty:
 
             SUBJECT = "Przypomnienie o ... "
             TEXT = "</i></b><br>" \
-                   "<br><div style='padding:16px;background:#efefef;'>"\
-                   + "Przypomnienie o płatności raty. <br><br><br> " + " Dnia " + str(self.termin_płatności) \
-                   + " upływa termin wpłaty raty za polisę nr.: " + str(self.nr_polisy) + " - T.U. " + self.tu \
+                   "<br><div style='padding:16px;background:#c9c9c9;'>"\
+                   + "<h3>Przypomnienie o płatności raty.</h3> <br><br> " + " Dnia " + str(self.termin_płatności) \
+                   + " upływa termin wpłaty raty za polisę nr.: " + str(self.nr_polisy) + " - T.U. " + str(self.tu) \
                    + ", na kwotę " + str(self.kwota) + " zł. <br>" + str(self.marka) + " " + str(self.model) + dash \
                    + str(self.nr_rej) + comma_year + str(self.rok_prod) \
                    + "<br><br> Prosimy o terminową wpłatę." \
                    + "<br><br><br>Z wyrazami szacunku,"\
                    + "<br>MAGRO Ubezpieczenia" \
                    + "<br><br>===================================================================" \
-                   + "<br>KONTAKT: https://ubezpieczenia-magro.pl/?pl_biura-ubezpieczen-kontakt,2"
+                   + "<br>https://ubezpieczenia-magro.pl/kalkulatorOC"
 
             html = TEXT
             text = 'MAGRO Ubezpieczenia Sp. z o.o.'
@@ -112,8 +114,8 @@ class MailingRaty:
             msg_full = mail.as_string().encode('utf-8')
             server = smtplib.SMTP('ubezpieczenia-magro.home.pl:25')
             server.starttls()
-            server.login('przypomnienia@ubezpieczenia-magro.pl', 'passw')
-            server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email], msg_full)
+            server.login('przypomnienia@ubezpieczenia-magro.pl', 'dsrhsR3P')
+            server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
             server.quit()
             print()
             if self.email is not None:
@@ -135,7 +137,6 @@ print('Czas wykonania: {:.0f} sekund'.format(end_time))
 ########################################################################################################################
 
 start_time = time.time()
-
 print()
 print()
 print()
@@ -146,10 +147,11 @@ class MailingOdn:
 
     def __init__(self):
         self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsx", read_only=True)
+        # self.wb = load_workbook(filename="C:/Users/ROBERT/Desktop/2014 BAZA MAGRO.xlsx", read_only=True)
         self.ws = self.wb['BAZA 2014']
-        self.cells = self.ws['G8000':'BA20000']
+        self.cells = self.ws['G9800':'BA24000']
         today = date.today()
-        self.week_period_odn = today - timedelta(-12)
+        self.week_period_odn = today - timedelta(-14)
 
 
     def read_excel(self):
@@ -182,6 +184,7 @@ class MailingOdn:
             # yield self.data_raty
             yield self.koniec
 
+
     def select_cells_odn(self):
         for self.koniec in self.read_excel():
             if self.koniec is not None and re.search('[0-9]', str(self.koniec)):
@@ -192,22 +195,23 @@ class MailingOdn:
                 self.koniec_okresu_bez_sec = koniec_okresu[:10]
                 if datetime.datetime.strptime(str(self.koniec_okresu_bez_sec), '%Y-%m-%d').date() == self.week_period_odn:
                     if self.email is not None and self.rodz_ub != 'życ' and self.przypis is not None:
-                        d = {'Filipiak': 'Ultimatum, tel. 694888197', 'Pankiewicz': 'R. Pankiewiczem, tel. 577839889',
-                             'Wawrzyniak': 'A. Wawrzyniak, tel. 691602675', 'Wołowski': 'M. Wołowskim, tel. 692830084',
-                             'Robert': 'naszym biurem, tel. 572 810 576'}
+
+                        d = {'Filipiak': 'Ultimatum, tel. 694888197', 'Wawrzyniak': 'A. Wawrzyniak, tel. 691602675',
+                             'Wołowski': 'M. Wołowskim, tel. 692830084', 'Robert': 'naszym biurem, tel. 572 810 576',
+                             }
                         if self.rozlicz in d:
                             self.rozlicz = d.get(self.rozlicz)
                         else:
-                            self.rozlicz = 'naszym biurem, tel. 602 752 893 lub 42 637 18 42'
+                            self.rozlicz = 'naszym biurem, tel. 602 752 893 lub 42 637 18 42 lub\n ' \
+                                           'ubezpieczenia.magro@gmail.com'
 
                         di = {'ALL': 'Allianz', 'AXA': 'AXA', 'COM': 'Compensa', 'EPZU': 'PZU', 'GEN': 'Generali',
                               'GOT': 'Gothaer', 'HDI': 'HDI', 'HES': 'Ergo Hestia', 'IGS': 'IGS', 'INT': 'INTER',
-                              'LIN': 'LINK 4', 'PRO': 'Proama', 'PZU': 'PZU', 'RIS': 'InterRisk', 'TUW': 'TUW',
-                              'TUZ': 'TUZ', 'UNI': 'Uniqa', 'WAR': 'Warta', 'WIE': 'Wiener'}
+                              'LIN': 'LINK 4', 'MTU': 'MTU', 'PRO': 'Proama', 'PZU': 'PZU', 'RIS': 'InterRisk', 'TUW': 'TUW',
+                              'TUZ': 'TUZ', 'UNI': 'Uniqa', 'WAR': 'Warta', 'WIE': 'Wiener', 'YCD': 'You Can Drive'}
                         self.tu = di.get(self.tu)
 
                         yield self.koniec_okresu_bez_sec
-
 
 
     def iterate_funct_odn(self):
@@ -231,8 +235,8 @@ class MailingOdn:
                 comma_year = ""
 
             TEXT = "</i></b><br>" \
-                   "<br><div style='padding:16px;background:#efefef;'>"\
-                   + "Przypomnienie o końcu ochrony ubezpieczeniowej. <br><br><br> " + " Dnia " + str(self.koniec_okresu_bez_sec) \
+                   "<br><div style='padding:16px;background:#b6c1d1;'>"\
+                   + "<h3>Przypomnienie o końcu ochrony ubezpieczeniowej.</h3> <br><br> " + " Dnia " + str(self.koniec_okresu_bez_sec) \
                    + " dobiega końca Twoja polisa ubezpieczeniowa, nr. " + str(self.nr_polisy) + " - T.U. " + self.tu \
                    + "<br>" + str(self.marka) + " " + str(self.model) + dash \
                    + str(self.przedmiot_ub) + comma_year + str(self.rok_prod) \
@@ -240,7 +244,7 @@ class MailingOdn:
                    + "<br><br><br>Z wyrazami szacunku,"\
                    + "<br>MAGRO Ubezpieczenia" \
                    + "<br><br>===================================================================" \
-                   + "<br>https://ubezpieczenia-magro.pl"
+                   + "<br>https://ubezpieczenia-magro.pl/kalkulatorOC"
 
             html = TEXT
             text = 'MAGRO Ubezpieczenia Sp. z o.o.'
@@ -258,8 +262,8 @@ class MailingOdn:
             msg_full = mail.as_string().encode('utf-8')
             server = smtplib.SMTP('ubezpieczenia-magro.home.pl:25')
             server.starttls()
-            server.login('przypomnienia@ubezpieczenia-magro.pl', passw)
-            server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email], msg_full) ##
+            server.login('przypomnienia@ubezpieczenia-magro.pl', 'dsrhsR3P')
+            server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
             server.quit()
             print()
             if self.email is not None:
@@ -278,4 +282,4 @@ end_time = time.time() - start_time
 print()
 print()
 print('Czas wykonania: {:.0f} sekund'.format(end_time))
-time.sleep(120)
+time.sleep(100)
