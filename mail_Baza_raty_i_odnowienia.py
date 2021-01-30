@@ -6,7 +6,7 @@ import re
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-# from l_h_mailing.py import passw
+from l_h_mailing import passw
 
 start_time = time.time()
 
@@ -16,8 +16,9 @@ print('MAILING - Przypomnienia o ratach - szuka...')
 class MailingRaty:
 
     def __init__(self):
-        self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsx", read_only=True)
-        # self.wb = load_workbook(filename="C:/Users/ROBERT/Desktop/2014 BAZA MAGRO.xlsx", read_only=True)
+        # self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsx", read_only=True)
+        self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=10.0.0.4,share=e/Agent baza/2014 BAZA MAGRO.xlsx",
+                                read_only=True)
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['T9800':'BA24000']
         today = date.today()
@@ -114,7 +115,7 @@ class MailingRaty:
             msg_full = mail.as_string().encode('utf-8')
             server = smtplib.SMTP('ubezpieczenia-magro.home.pl:25')
             server.starttls()
-            server.login('przypomnienia@ubezpieczenia-magro.pl', 'dsrhsR3P')
+            server.login('przypomnienia@ubezpieczenia-magro.pl', passw)
             server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
             server.quit()
             print()
@@ -146,8 +147,9 @@ print('MAILING - Przypomnienia o wznowieniach - szuka...')
 class MailingOdn:
 
     def __init__(self):
-        self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsx", read_only=True)
-        # self.wb = load_workbook(filename="C:/Users/ROBERT/Desktop/2014 BAZA MAGRO.xlsx", read_only=True)
+        # self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsx", read_only=True)
+        self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=10.0.0.4,share=e/Agent baza/2014 BAZA MAGRO.xlsx",
+                                read_only=True)
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['G9800':'BA24000']
         today = date.today()
@@ -262,7 +264,7 @@ class MailingOdn:
             msg_full = mail.as_string().encode('utf-8')
             server = smtplib.SMTP('ubezpieczenia-magro.home.pl:25')
             server.starttls()
-            server.login('przypomnienia@ubezpieczenia-magro.pl', 'dsrhsR3P')
+            server.login('przypomnienia@ubezpieczenia-magro.pl', passw)
             server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
             server.quit()
             print()
