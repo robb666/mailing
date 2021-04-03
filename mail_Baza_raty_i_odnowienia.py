@@ -87,25 +87,419 @@ class MailingRaty:
                 dash = ""
                 comma_year = ""
 
+            if self.rok_prod == '':
+                comma_year = ''
+
             SUBJECT = "Przypomnienie o ... "
-            TEXT = "</i></b><br>" \
-                   "<br><div style='padding:16px;background:#c9c9c9;'>"\
-                   + "<h3>Przypomnienie o płatności raty.</h3> <br><br> " + " Dnia " + str(self.termin_płatności) \
-                   + " upływa termin wpłaty raty za polisę nr.: " + str(self.nr_polisy) + " - T.U. " + str(self.tu) \
-                   + ", na kwotę " + str(self.kwota) + " zł. <br>" + str(self.marka) + " " + str(self.model) + dash \
-                   + str(self.nr_rej) + comma_year + str(self.rok_prod) \
-                   + "<br><br> Prosimy o terminową wpłatę." \
-                   + "<br><br><br>Z wyrazami szacunku,"\
-                   + "<br>MAGRO Ubezpieczenia" \
-                   + "<br><br>===================================================================" \
-                   + "<br>https://ubezpieczenia-magro.pl/kalkulatorOC"
+            TEXT = """
+                         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+                     <html xmlns="http://www.w3.org/1999/xhtml">
+                     <head>
+                       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                       <meta name="viewport" content="width=device-width, initial-scale=1" />
+                       <title>Oxygen Invitation</title>
+
+                       <style type="text/css">
+                         /* Take care of image borders and formatting, client hacks */
+                         img { max-width: 600px; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;}
+                         a img { border: none; }
+                         table { border-collapse: collapse !important;}
+                         #outlook a { padding:0; }
+                         .ReadMsgBody { width: 100%; }
+                         .ExternalClass { width: 100%; }
+                         .backgroundTable { margin: 0 auto; padding: 0; width: 100% !important; }
+                         table td { border-collapse: collapse; }
+                         .ExternalClass * { line-height: 115%; }
+                         .container-for-gmail-android { min-width: 600px; }
+
+
+                         /* General styling */
+                         * {
+                           font-family: Helvetica, Arial, sans-serif;
+                         }
+
+                         body {
+                           -webkit-font-smoothing: antialiased;
+                           -webkit-text-size-adjust: none;
+                           width: 100% !important;
+                           margin: 0 !important;
+                           height: 100%;
+                           color: #676767;
+                         }
+
+                         td {
+                           font-family: Helvetica, Arial, sans-serif;
+                           font-size: 14px;
+                           color: #777777;
+                           text-align: center;
+                           line-height: 21px;
+                         }
+
+                         a {
+                           color: #fe5100; font-size:1.6em;
+                           text-decoration: none !important;
+                         }
+                         .kla{color:#fff !important;}
+
+                         .pull-left {
+                           text-align: left;
+                         }
+
+                         .pull-right {
+                           text-align: right;
+                         }
+
+                         .header-lg,
+                         .header-md,
+                         .header-sm {
+                           font-size: 25px;
+                           font-weight: 700;
+                           line-height: normal;
+                           padding: 35px 0 0;
+                           color: #4d4d4d;
+                         }
+
+                         .header-md {
+                           font-size: 24px;
+                         }
+
+                         .header-sm {
+                           padding: 5px 0;
+                           font-size: 18px;
+                           line-height: 1.3;
+                         }
+
+                         .content-padding {
+                           padding: 20px 0 30px;
+                         }
+
+                         .mobile-header-padding-right {
+                           width: 20%;
+                           text-align: right;
+                           padding-left: 10px;
+                         }
+
+                         .mobile-header-padding-left {
+                           width: 80%;
+                           text-align: left;
+                           padding-left: 10px;
+                         }
+
+                         .free-text {
+                           width: 100% !important;
+                           padding: 10px 60px 0px;
+                         }
+
+                         .block-rounded {
+                           border-radius: 5px;
+                           border: 1px solid #e5e5e5;
+                           vertical-align: top;
+                         }
+
+                         .button {
+                           padding: 30px 0 0;
+                         }
+
+                         .info-block {
+                           padding: 0 20px;
+                           width: 260px;
+                         }
+
+                         .mini-block-container {
+                           padding: 30px 50px;
+                           width: 500px;
+                         }
+
+                         .mini-block {
+                         background-color: #ffffff;
+                         width: 93%;
+                         border: 1px solid #cccccc;
+                         border-radius: 5px;
+                         padding: 34px 10px;
+                         margin: 15px 0px;
+                     	    display: block;
+
+                         }
+
+                         .block-rounded {
+                           width: 260px;
+                         }
+
+                         .info-img {
+                           width: 258px;
+                           border-radius: 5px 5px 0 0;
+                         }
+
+                         .force-width-img {
+                           width: 480px;
+                           height: 1px !important;
+                         }
+
+                         .force-width-full {
+                           width: 600px;
+                           height: 1px !important;
+                         }
+
+                         .user-img img {
+                           width: 130px;
+                           border-radius: 5px;
+                           border: 1px solid #cccccc;
+                         }
+
+                         .user-img {
+                           text-align: center;
+                           border-radius: 100px;
+                           color: #ff6f6f;
+                           font-weight: 700;
+                         }
+
+                         .user-msg {
+                           padding-top: 10px;
+                           font-size: 14px;
+                           text-align: center;
+                           font-style: italic;
+                         }
+
+                         .mini-img {
+                           padding: 5px;
+                           WIDTH:48%;
+
+                         }
+
+                         .mini-img img {
+                           border-radius: 5px;
+                           WIDTH:100%;
+                     	  min-height: 100px;
+                         }
+
+                         .force-width-gmail {
+                           min-width:600px;
+                           height: 0px !important;
+                           line-height: 1px !important;
+                           font-size: 1px !important;
+                         }
+
+                         .mini-imgs {
+                           padding: 25px 0 30px;
+                         }
+                       </style>
+
+                       <style type="text/css" media="screen">
+                         @import url(https://fonts.googleapis.com/css?family=Oxygen:400,700);
+                       </style>
+
+                       <style type="text/css" media="screen">
+                         @media screen {
+                           /* Thanks Outlook 2013! */
+                           * {
+                             font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;
+                           }
+                         }
+                       </style>
+
+                       <style type="text/css" media="only screen and (max-width: 480px)">
+                         /* Mobile styles */
+                         @media only screen and (max-width: 480px) {
+
+                           table[class*="container-for-gmail-android"] {
+                             min-width: 290px !important;
+                             width: 100% !important;
+                           }
+
+                           table[class="w320"] {
+                             width: 320px !important;
+                           }
+
+                           img[class="force-width-gmail"] {
+                             display: none !important;
+                             width: 0 !important;
+                             height: 0 !important;
+                           }
+
+                           td[class*="mobile-header-padding-left"] {
+                             width: 80% !important;
+                             padding-left: 0 !important;
+                           }
+
+                           td[class*="mobile-header-padding-right"] {
+                             width: 20% !important;
+                             padding-right: 0 !important;
+                           }
+
+                           td[class="mobile-block"] {
+                             display: block !important;
+                           }
+
+                           td[class="mini-img"],
+                           td[class="mini-img"] img{
+                             width: 150px !important;min-height: 100px;
+                           }
+
+                           td[class="header-lg"] {
+                             font-size: 24px !important;
+                             padding-bottom: 5px !important;
+                           }
+
+                           td[class="header-md"] {
+                             font-size: 18px !important;
+                             padding-bottom: 5px !important;
+                           }
+
+                           td[class="content-padding"] {
+                             padding: 5px 0 30px !important;
+                           }
+
+                           td[class="button"] {
+                             padding: 5px !important;
+                           }
+
+                           td[class*="free-text"] {
+                             padding: 10px 18px 30px !important;
+                           }
+
+                           img[class="force-width-img"],
+                           img[class="force-width-full"] {
+                             display: none !important;
+                           }
+
+                           td[class="info-block"] {
+                             display: block !important;
+                             width: 280px !important;
+                             padding-bottom: 40px !important;
+                           }
+
+                           td[class="info-img"],
+                           img[class="info-img"] {
+                             width: 278px !important;
+                           }
+
+                           td[class="mini-block-container"] {
+                             padding: 8px 20px !important;
+                             width: 280px !important;
+                           }
+
+                           td[class="mini-block"] {
+                             padding: 20px !important;
+                           }
+
+                           td[class="user-img"] {
+                             display: block !important;
+                             text-align: center !important;
+                             width: 100% !important;
+                             padding-bottom: 10px;
+                           }
+
+                           td[class="user-msg"] {
+                             display: block !important;
+                             padding-bottom: 20px;
+                           }
+                         }
+
+                     	td.m_-8810930916023015007user-msg a span {
+                         float: left;
+                         font-size: 28px;
+                         color: #555 !important;
+                         font-weight: bold;
+                         margin: 12px;
+                         margin: -10px 12px 0px;
+                     }
+
+                     td.m_-8810930916023015007user-msg i {
+                         float: right;
+                         font-size: 17px;
+                         color: #555 !important;
+                         font-weight: 600;
+                         color: #fe5000 !important;
+                         margin: -10px 0px;
+                     }
+
+                     .link{
+                     background-color:#ff6f6f;border-radius:5px;color:#ffffff;display:inline-block;font-family:'Cabin',Helvetica,Arial,sans-serif;font-size:14px;font-weight:regular;line-height:45px;text-align:center;text-decoration:none;width:155px;
+                     }
+                     .logo{
+                     color: #4CAF50;
+                         font-size: 35px;
+                         font-weight:bold;
+
+                         color: #4d4d4d;
+                     }
+                       </style>
+                     </head>
+
+                     <body bgcolor="#f7f7f7">
+                     <table align="center" cellpadding="0" cellspacing="0" class="container-for-gmail-android" width="100%">
+                       <tr>
+                         <td align="left" valign="top" width="100%" style="background:repeat-x url(http://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg) #ffffff;">
+                           <center>
+                           <img src="https://s3.amazonaws.com/swu-filepicker/SBb2fQPrQ5ezxmqUTgCr_transparent.png" class="force-width-gmail">
+                             <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff" background="https://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg" style="background-color:transparent">
+                               <tr>
+                                 <td width="100%" height="80" valign="top" style="text-align: center; vertical-align:middle;">
+                                 <!--[if gte mso 9]>
+                                 <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="mso-width-percent:1000;height:80px; v-text-anchor:middle;">
+                                   <v:fill type="tile" src="http://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg" color="#ffffff" />
+                                   <v:textbox inset="0,0,0,0">
+                                 <![endif]-->
+                                   <center>
+                                     <table cellpadding="0" cellspacing="0" width="600" class="w320">
+                                       <tr>
+                                         <td class="pull-left mobile-header-padding-left" style="vertical-align: middle;">
+                                           <a href="" class="logo">MAGRO<!--<img width="137" height="47" src="http://s3.amazonaws.com/swu-filepicker/0zxBZVuORSxdc9ZCqotL_logo_03.gif" alt="logo">--></a>
+                                         </td>
+                                         <td class="pull-right mobile-header-padding-right" style="color: #4d4d4d;">
+
+                                           <a href="https://www.facebook.com/ubezpieczeniaMagro/"><img width="38" height="47" src="https://s3.amazonaws.com/swu-filepicker/LMPMj7JSRoCWypAvzaN3_social_09.gif" alt="facebook" /></a>
+
+                                         </td>
+                                       </tr>
+                                     </table>
+                                   </center>
+                                   <!--[if gte mso 9]>
+                                   </v:textbox>
+                                 </v:rect>
+                                 <![endif]-->
+                                 </td>
+                               </tr>
+                             </table>
+                           </center>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td align="center" valign="top" width="100%" style="background-color: #f7f7f7;" class="content-padding">
+                           <center>
+                             <table cellspacing="0" cellpadding="0" width="600" class="w320">
+                               <tr>
+                                 <td class="header-lg">
+                                   Przypomnienie o płatności raty.
+                                 </td>
+                               </tr>
+                               <tr>
+                                 <td class="free-text">
+                                   <br>Dnia """ + str(self.termin_płatności) + ' upływa termin wpłaty raty za polisę.' \
+                                                                               '<br>Polisa nr.:  ' + str(
+                self.nr_polisy) + " - T.U. " + self.tu + \
+                   """<br>Kwota: """ + str(self.kwota) + """ zł<br>""" \
+                   + str(self.marka) + ' ' + str(self.model) + dash + str(self.nr_rej) + comma_year + str(self.rok_prod) + \
+                   """<br><br><br>Prosimy o terminową wpłatę,<br> 
+                                   ubezpieczenia-magro.pl
+
+       </td>
+     </tr>
+     <tr>
+       <td class="mini-block-container">
+         <table cellspacing="0" cellpadding="0" width="100%"  style="border-collapse:separate !important;">
+           <tr>
+
+             <td class="m_-8810930916023015007user-msg user-msg">
+
+"""
 
             html = TEXT
             text = 'MAGRO Ubezpieczenia Sp. z o.o.'
 
             mail = MIMEMultipart('alternative')
             mail['From'] = 'przypomnienia@ubezpieczenia-magro.pl'
-            mail['To'] = 'ubezpieczenia.magro@gmail.com' #self.email
+            mail['To'] = self.email  # Do prob zmienic email
             mail['Cc'] = 'ubezpieczenia.magro@gmail.com'
             mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
 
@@ -114,10 +508,11 @@ class MailingRaty:
             mail.attach(part1)
             mail.attach(part2)
             msg_full = mail.as_string().encode('utf-8')
-            server = smtplib.SMTP('ubezpieczenia-magro.home.pl:25')
+            server = smtplib.SMTP('ubezpieczenia-magro.pl', 587)
             server.starttls()
             server.login('przypomnienia@ubezpieczenia-magro.pl', passw)
             server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
+            # server.sendmail('przypomnienia@ubezpieczenia-magro.pl', ['ubezpieczenia.magro@gmail.com'],msg_full)  # Do prob
             server.quit()
             print()
             if self.email is not None:
@@ -205,8 +600,9 @@ class MailingOdn:
                         if self.rozlicz in d:
                             self.rozlicz = d.get(self.rozlicz)
                         else:
-                            self.rozlicz = 'naszym biurem, tel. 602 752 893 lub 42 637 19 97 lub\n ' \
-                                           'ubezpieczenia.magro@gmail.com'
+                            self.rozlicz = 'naszym biurem,<br>' \
+                                           'tel. 602 752 893 lub 42 637 19 97'
+
 
                         di = {'ALL': 'Allianz', 'AXA': 'AXA', 'COM': 'Compensa', 'EPZU': 'PZU', 'GEN': 'Generali',
                               'GOT': 'Gothaer', 'HDI': 'HDI', 'HES': 'Ergo Hestia', 'IGS': 'IGS', 'INT': 'INTER',
@@ -237,24 +633,417 @@ class MailingOdn:
                 dash = ""
                 comma_year = ""
 
-            TEXT = "</i></b><br>" \
-                   "<br><div style='padding:16px;background:#b6c1d1;'>"\
-                   + "<h3>Przypomnienie o końcu ochrony ubezpieczeniowej.</h3> <br><br> " + " Dnia " + str(self.koniec_okresu_bez_sec) \
-                   + " dobiega końca Twoja polisa ubezpieczeniowa, nr. " + str(self.nr_polisy) + " - T.U. " + self.tu \
-                   + "<br>" + str(self.marka) + " " + str(self.model) + dash \
-                   + str(self.przedmiot_ub) + comma_year + str(self.rok_prod) \
-                   + "<br><br> W sprawie odnowienia prosimy o kontakt z " + str(self.rozlicz) \
-                   + "<br><br><br>Z wyrazami szacunku,"\
-                   + "<br>MAGRO Ubezpieczenia" \
-                   + "<br><br>===================================================================" \
-                   + "<br>https://ubezpieczenia-magro.pl/kalkulatorOC"
+            if self.rok_prod == '':
+                comma_year = ''
+
+
+            TEXT = """
+                        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+                    <html xmlns="http://www.w3.org/1999/xhtml">
+                    <head>
+                      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                      <meta name="viewport" content="width=device-width, initial-scale=1" />
+                      <title>Oxygen Invitation</title>
+
+                      <style type="text/css">
+                        /* Take care of image borders and formatting, client hacks */
+                        img { max-width: 600px; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;}
+                        a img { border: none; }
+                        table { border-collapse: collapse !important;}
+                        #outlook a { padding:0; }
+                        .ReadMsgBody { width: 100%; }
+                        .ExternalClass { width: 100%; }
+                        .backgroundTable { margin: 0 auto; padding: 0; width: 100% !important; }
+                        table td { border-collapse: collapse; }
+                        .ExternalClass * { line-height: 115%; }
+                        .container-for-gmail-android { min-width: 600px; }
+
+
+                        /* General styling */
+                        * {
+                          font-family: Helvetica, Arial, sans-serif;
+                        }
+
+                        body {
+                          -webkit-font-smoothing: antialiased;
+                          -webkit-text-size-adjust: none;
+                          width: 100% !important;
+                          margin: 0 !important;
+                          height: 100%;
+                          color: #676767;
+                        }
+
+                        td {
+                          font-family: Helvetica, Arial, sans-serif;
+                          font-size: 14px;
+                          color: #777777;
+                          text-align: center;
+                          line-height: 21px;
+                        }
+
+                        a {
+                          color: #fe5100; font-size:1.6em;
+                          text-decoration: none !important;
+                        }
+                        .kla{color:#fff !important;}
+
+                        .pull-left {
+                          text-align: left;
+                        }
+
+                        .pull-right {
+                          text-align: right;
+                        }
+
+                        .header-lg,
+                        .header-md,
+                        .header-sm {
+                          font-size: 25px;
+                          font-weight: 700;
+                          line-height: normal;
+                          padding: 35px 0 0;
+                          color: #4d4d4d;
+                        }
+
+                        .header-md {
+                          font-size: 24px;
+                        }
+
+                        .header-sm {
+                          padding: 5px 0;
+                          font-size: 18px;
+                          line-height: 1.3;
+                        }
+
+                        .content-padding {
+                          padding: 20px 0 30px;
+                        }
+
+                        .mobile-header-padding-right {
+                          width: 20%;
+                          text-align: right;
+                          padding-left: 10px;
+                        }
+
+                        .mobile-header-padding-left {
+                          width: 80%;
+                          text-align: left;
+                          padding-left: 10px;
+                        }
+
+                        .free-text {
+                          width: 100% !important;
+                          padding: 10px 60px 0px;
+                        }
+
+                        .block-rounded {
+                          border-radius: 5px;
+                          border: 1px solid #e5e5e5;
+                          vertical-align: top;
+                        }
+
+                        .button {
+                          padding: 30px 0 0;
+                        }
+
+                        .info-block {
+                          padding: 0 20px;
+                          width: 260px;
+                        }
+
+                        .mini-block-container {
+                          padding: 30px 50px;
+                          width: 500px;
+                        }
+
+                        .mini-block {
+                        background-color: #ffffff;
+                        width: 93%;
+                        border: 1px solid #cccccc;
+                        border-radius: 5px;
+                        padding: 34px 10px;
+                        margin: 15px 0px;
+                            display: block;
+
+                        }
+
+                        .block-rounded {
+                          width: 260px;
+                        }
+
+                        .info-img {
+                          width: 258px;
+                          border-radius: 5px 5px 0 0;
+                        }
+
+                        .force-width-img {
+                          width: 480px;
+                          height: 1px !important;
+                        }
+
+                        .force-width-full {
+                          width: 600px;
+                          height: 1px !important;
+                        }
+
+                        .user-img img {
+                          width: 130px;
+                          border-radius: 5px;
+                          border: 1px solid #cccccc;
+                        }
+
+                        .user-img {
+                          text-align: center;
+                          border-radius: 100px;
+                          color: #ff6f6f;
+                          font-weight: 700;
+                        }
+
+                        .user-msg {
+                          padding-top: 10px;
+                          font-size: 14px;
+                          text-align: center;
+                          font-style: italic;
+                        }
+
+                        .mini-img {
+                          padding: 5px;
+                          WIDTH:48%;
+
+                        }
+
+                        .mini-img img {
+                          border-radius: 5px;
+                          WIDTH:100%;
+                          min-height: 100px;
+                        }
+
+                        .force-width-gmail {
+                          min-width:600px;
+                          height: 0px !important;
+                          line-height: 1px !important;
+                          font-size: 1px !important;
+                        }
+
+                        .mini-imgs {
+                          padding: 25px 0 30px;
+                        }
+                      </style>
+
+                      <style type="text/css" media="screen">
+                        @import url(https://fonts.googleapis.com/css?family=Oxygen:400,700);
+                      </style>
+
+                      <style type="text/css" media="screen">
+                        @media screen {
+                          /* Thanks Outlook 2013! */
+                          * {
+                            font-family: 'Oxygen', 'Helvetica Neue', 'Arial', 'sans-serif' !important;
+                          }
+                        }
+                      </style>
+
+                      <style type="text/css" media="only screen and (max-width: 480px)">
+                        /* Mobile styles */
+                        @media only screen and (max-width: 480px) {
+
+                          table[class*="container-for-gmail-android"] {
+                            min-width: 290px !important;
+                            width: 100% !important;
+                          }
+
+                          table[class="w320"] {
+                            width: 320px !important;
+                          }
+
+                          img[class="force-width-gmail"] {
+                            display: none !important;
+                            width: 0 !important;
+                            height: 0 !important;
+                          }
+
+                          td[class*="mobile-header-padding-left"] {
+                            width: 80% !important;
+                            padding-left: 0 !important;
+                          }
+
+                          td[class*="mobile-header-padding-right"] {
+                            width: 20% !important;
+                            padding-right: 0 !important;
+                          }
+
+                          td[class="mobile-block"] {
+                            display: block !important;
+                          }
+
+                          td[class="mini-img"],
+                          td[class="mini-img"] img{
+                            width: 150px !important;min-height: 100px;
+                          }
+
+                          td[class="header-lg"] {
+                            font-size: 24px !important;
+                            padding-bottom: 5px !important;
+                          }
+
+                          td[class="header-md"] {
+                            font-size: 18px !important;
+                            padding-bottom: 5px !important;
+                          }
+
+                          td[class="content-padding"] {
+                            padding: 5px 0 30px !important;
+                          }
+
+                          td[class="button"] {
+                            padding: 5px !important;
+                          }
+
+                          td[class*="free-text"] {
+                            padding: 10px 18px 30px !important;
+                          }
+
+                          img[class="force-width-img"],
+                          img[class="force-width-full"] {
+                            display: none !important;
+                          }
+
+                          td[class="info-block"] {
+                            display: block !important;
+                            width: 280px !important;
+                            padding-bottom: 40px !important;
+                          }
+
+                          td[class="info-img"],
+                          img[class="info-img"] {
+                            width: 278px !important;
+                          }
+
+                          td[class="mini-block-container"] {
+                            padding: 8px 20px !important;
+                            width: 280px !important;
+                          }
+
+                          td[class="mini-block"] {
+                            padding: 20px !important;
+                          }
+
+                          td[class="user-img"] {
+                            display: block !important;
+                            text-align: center !important;
+                            width: 100% !important;
+                            padding-bottom: 10px;
+                          }
+
+                          td[class="user-msg"] {
+                            display: block !important;
+                            padding-bottom: 20px;
+                          }
+                        }
+
+                        td.m_-8810930916023015007user-msg a span {
+                        float: left;
+                        font-size: 28px;
+                        color: #555 !important;
+                        font-weight: bold;
+                        margin: 12px;
+                        margin: -10px 12px 0px;
+                    }
+
+                    td.m_-8810930916023015007user-msg i {
+                        float: right;
+                        font-size: 17px;
+                        color: #555 !important;
+                        font-weight: 600;
+                        color: #fe5000 !important;
+                        margin: -10px 0px;
+                    }
+
+                    .link{
+                    background-color:#ff6f6f;border-radius:5px;color:#ffffff;display:inline-block;font-family:'Cabin',Helvetica,Arial,sans-serif;font-size:14px;font-weight:regular;line-height:45px;text-align:center;text-decoration:none;width:155px;
+                    }
+                    .logo{
+                    color: #4CAF50;
+                        font-size: 35px;
+                        font-weight:bold;
+
+                        color: #4d4d4d;
+                    }
+                      </style>
+                    </head>
+
+                    <body bgcolor="#f7f7f7">
+                    <table align="center" cellpadding="0" cellspacing="0" class="container-for-gmail-android" width="100%">
+                      <tr>
+                        <td align="left" valign="top" width="100%" style="background:repeat-x url(http://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg) #ffffff;">
+                          <center>
+                          <img src="https://s3.amazonaws.com/swu-filepicker/SBb2fQPrQ5ezxmqUTgCr_transparent.png" class="force-width-gmail">
+                            <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff" background="https://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg" style="background-color:transparent">
+                              <tr>
+                                <td width="100%" height="80" valign="top" style="text-align: center; vertical-align:middle;">
+                                <!--[if gte mso 9]>
+                                <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="mso-width-percent:1000;height:80px; v-text-anchor:middle;">
+                                  <v:fill type="tile" src="http://s3.amazonaws.com/swu-filepicker/4E687TRe69Ld95IDWyEg_bg_top_02.jpg" color="#ffffff" />
+                                  <v:textbox inset="0,0,0,0">
+                                <![endif]-->
+                                  <center>
+                                    <table cellpadding="0" cellspacing="0" width="600" class="w320">
+                                      <tr>
+                                        <td class="pull-left mobile-header-padding-left" style="vertical-align: middle;">
+                                          <a href="" class="logo">MAGRO<!--<img width="137" height="47" src="http://s3.amazonaws.com/swu-filepicker/0zxBZVuORSxdc9ZCqotL_logo_03.gif" alt="logo">--></a>
+                                        </td>
+                                        <td class="pull-right mobile-header-padding-right" style="color: #4d4d4d;">
+
+                                          <a href="https://www.facebook.com/ubezpieczeniaMagro/"><img width="38" height="47" src="https://s3.amazonaws.com/swu-filepicker/LMPMj7JSRoCWypAvzaN3_social_09.gif" alt="facebook" /></a>
+
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </center>
+                                  <!--[if gte mso 9]>
+                                  </v:textbox>
+                                </v:rect>
+                                <![endif]-->
+                                </td>
+                              </tr>
+                            </table>
+                          </center>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="top" width="100%" style="background-color: #f7f7f7;" class="content-padding">
+                          <center>
+                            <table cellspacing="0" cellpadding="0" width="600" class="w320">
+                              <tr>
+                                <td class="header-lg">
+                                  Przypomnienie o końcu ochrony.
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="free-text">
+                                  <br>Dnia """ + str(self.koniec_okresu_bez_sec) + ' dobiega końca Twoja polisa ubezpieczeniowa.' \
+                               + '<br>Polisa nr.:  ' + str(self.nr_polisy) + " - T.U. " + self.tu + '<br>' \
+                       + str(self.marka) + ' ' + str(self.model) + dash + str(self.przedmiot_ub) + comma_year + str(self.rok_prod) + \
+                       """<br><br><br>W sprawie odnowienia prosimy o kontakt<br>z """ + str(self.rozlicz) + \
+                       """.<br><br><br><br> 
+                                   ubezpieczenia-magro.pl/kalkulatorOC
+       </td>
+     </tr>
+     <tr>
+       <td class="mini-block-container">
+         <table cellspacing="0" cellpadding="0" width="100%"  style="border-collapse:separate !important;">
+           <tr>
+
+             <td class="m_-8810930916023015007user-msg user-msg">
+
+    """
 
             html = TEXT
             text = 'MAGRO Ubezpieczenia Sp. z o.o.'
 
             mail = MIMEMultipart('alternative')
             mail['From'] = 'przypomnienia@ubezpieczenia-magro.pl'
-            mail['To'] = 'ubezpieczenia.magro@gmail.com' #self.email
+            mail['To'] = self.email  # Do prob zmienic email
             mail['Cc'] = 'ubezpieczenia.magro@gmail.com'
             mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
 
@@ -263,10 +1052,11 @@ class MailingOdn:
             mail.attach(part1)
             mail.attach(part2)
             msg_full = mail.as_string().encode('utf-8')
-            server = smtplib.SMTP('ubezpieczenia-magro.home.pl:25')
+            server = smtplib.SMTP('ubezpieczenia-magro.pl', 25)
             server.starttls()
             server.login('przypomnienia@ubezpieczenia-magro.pl', passw)
             server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
+            # server.sendmail('przypomnienia@ubezpieczenia-magro.pl', ['ubezpieczenia.magro@gmail.com'], msg_full)  # do prob
             server.quit()
             print()
             if self.email is not None:
@@ -285,4 +1075,4 @@ end_time = time.time() - start_time
 print()
 print()
 print('Czas wykonania: {:.0f} sekund'.format(end_time))
-time.sleep(100)
+time.sleep(10)
