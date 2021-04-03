@@ -20,7 +20,8 @@ class MailingRaty:
         self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=10.0.0.4,share=e/Agent baza/2014 BAZA MAGRO.xlsx",
                                 read_only=True)
         self.ws = self.wb['BAZA 2014']
-        self.cells = self.ws['T9800':'BA24000']
+        print(f'{self.ws.max_row}')
+        self.cells = self.ws['T4178':f'BA{self.ws.max_row}']
         today = date.today()
         self.week_period = today - timedelta(-5)
 
@@ -42,7 +43,7 @@ class MailingRaty:
                 self.nr_rej = ''
             self.rok_prod = rok_prod.value
             if self.rok_prod is None:
-                self.rok_prod = 'b/d'
+                self.rok_prod = ''
             self.tu = tu.value
             self.rodz_ub = rodz_ub.value
             self.nr_polisy = nr_polisy.value
@@ -104,7 +105,7 @@ class MailingRaty:
 
             mail = MIMEMultipart('alternative')
             mail['From'] = 'przypomnienia@ubezpieczenia-magro.pl'
-            mail['To'] = self.email
+            mail['To'] = 'ubezpieczenia.magro@gmail.com' #self.email
             mail['Cc'] = 'ubezpieczenia.magro@gmail.com'
             mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
 
@@ -151,7 +152,7 @@ class MailingOdn:
         self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=10.0.0.4,share=e/Agent baza/2014 BAZA MAGRO.xlsx",
                                 read_only=True)
         self.ws = self.wb['BAZA 2014']
-        self.cells = self.ws['G9800':'BA24000']
+        self.cells = self.ws['G4178':f'BA{self.ws.max_row}']
         today = date.today()
         self.week_period_odn = today - timedelta(-14)
 
@@ -173,7 +174,7 @@ class MailingOdn:
                 self.przedmiot_ub = ''
             self.rok_prod = rok_prod.value
             if self.rok_prod is None:
-                self.rok_prod = 'b/d'
+                self.rok_prod = ''
             self.koniec = koniec.value
             self.tu = tu.value
             self.rodz_ub = rodz_ub.value
@@ -204,7 +205,7 @@ class MailingOdn:
                         if self.rozlicz in d:
                             self.rozlicz = d.get(self.rozlicz)
                         else:
-                            self.rozlicz = 'naszym biurem, tel. 602 752 893 lub 42 637 18 42 lub\n ' \
+                            self.rozlicz = 'naszym biurem, tel. 602 752 893 lub 42 637 19 97 lub\n ' \
                                            'ubezpieczenia.magro@gmail.com'
 
                         di = {'ALL': 'Allianz', 'AXA': 'AXA', 'COM': 'Compensa', 'EPZU': 'PZU', 'GEN': 'Generali',
@@ -253,7 +254,7 @@ class MailingOdn:
 
             mail = MIMEMultipart('alternative')
             mail['From'] = 'przypomnienia@ubezpieczenia-magro.pl'
-            mail['To'] = self.email
+            mail['To'] = 'ubezpieczenia.magro@gmail.com' #self.email
             mail['Cc'] = 'ubezpieczenia.magro@gmail.com'
             mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
 

@@ -1,2 +1,15 @@
 
 l_h_mailing.py
+var_pass_practice.py
+proby_wysylki.py
+*.spec
+*.html
+*.txt
+*.toc
+*.pyc
+*.zip
+*.manifest
+*.pkg
+*.pyz
+*.exe
+mail_Baza.py
