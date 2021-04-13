@@ -10,7 +10,8 @@ from l_h_mailing import passw
 
 start_time = time.time()
 
-print('MAILING - Przypomnienia o ratach - szuka...')
+
+print('\n' * 4 + 'MAILING - Przypomnienia o ratach - szuka' + '.' * 3)
 
 
 class MailingRaty:
@@ -20,7 +21,6 @@ class MailingRaty:
         self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=10.0.0.4,share=e/Agent baza/2014 BAZA MAGRO.xlsx",
                                 read_only=True)
         self.ws = self.wb['BAZA 2014']
-        print(f'{self.ws.max_row}')
         self.cells = self.ws['T4178':f'BA{self.ws.max_row}']
         today = date.today()
         self.week_period = today - timedelta(-5)
@@ -527,17 +527,14 @@ raty.select_cells()
 raty.iterate_funct()
 
 end_time = time.time() - start_time
-print()
-print()
-print('Czas wykonania: {:.0f} sekund'.format(end_time))
+print('\nCzas wykonania: {:.0f} sekund'.format(end_time))
 
 ########################################################################################################################
 
 start_time = time.time()
+
 print()
-print()
-print()
-print('MAILING - Przypomnienia o wznowieniach - szuka...')
+print('\n' * 4 + 'MAILING - Przypomnienia o wznowieniach - szuka' + '.' * 3)
 
 
 class MailingOdn:
@@ -1070,9 +1067,6 @@ raty.read_excel()
 raty.select_cells_odn()
 raty.iterate_funct_odn()
 
-
 end_time = time.time() - start_time
-print()
-print()
-print('Czas wykonania: {:.0f} sekund'.format(end_time))
+print('\nCzas wykonania: {:.0f} sekund'.format(end_time))
 time.sleep(10)
