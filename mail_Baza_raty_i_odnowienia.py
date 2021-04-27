@@ -24,7 +24,7 @@ class MailingRaty:
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['T4178':f'BA{self.ws.max_row}']
         today = date.today()
-        self.week_period = today - timedelta(-9)  # -5
+        self.week_period = today - timedelta(-5)  # -5
 
     def read_excel(self):
         for email, j1, j2, marka, model, nr_rej, rok_prod, SU, j3, j4, j5, pocz, j7, j8, j9, j10, j11, j12, tu, \
@@ -146,6 +146,7 @@ MAGRO Ubezpieczenia Sp. z o.o.
                 print('Wysłane przypomnienia o nadchodzących ratach!')
             else:
                 print('Brak adresu email')
+
 
 TEXT = """
              <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -532,7 +533,6 @@ TEXT = """
                    <tr>
                      <td class="free-text">"""
 
-
 raty = MailingRaty(TEXT)
 raty.read_excel()
 raty.select_cells()
@@ -559,7 +559,7 @@ class MailingOdn:
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['G4178':f'BA{self.ws.max_row}']
         today = date.today()
-        self.week_period_odn = today - timedelta(-13)
+        self.week_period_odn = today - timedelta(-14)
 
 
     def read_excel(self):
