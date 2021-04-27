@@ -23,7 +23,7 @@ class MailingRaty:
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['T4178':f'BA{self.ws.max_row}']
         today = date.today()
-        self.week_period = today - timedelta(-5)
+        self.week_period = today - timedelta(-9)  # -5
 
     def read_excel(self):
         for email, j1, j2, marka, model, nr_rej, rok_prod, SU, j3, j4, j5, pocz, j7, j8, j9, j10, j11, j12, tu, \
@@ -62,8 +62,9 @@ class MailingRaty:
                     if self.email is not None and self.rodz_ub != 'życ':
                         di = {'ALL': 'Allianz', 'AXA': 'AXA', 'COM': 'Compensa', 'EPZU': 'PZU', 'GEN': 'Generali',
                               'GOT': 'Gothaer', 'HDI': 'HDI', 'HES': 'Ergo Hestia', 'IGS': 'IGS', 'INT': 'INTER',
-                              'LIN': 'LINK 4', 'MTU': 'MTU', 'PRO': 'Proama', 'PZU': 'PZU', 'RIS': 'InterRisk', 'TUW': 'TUW',
-                              'TUZ': 'TUZ', 'UNI': 'Uniqa', 'WAR': 'Warta', 'WIE': 'Wiener', 'YCD': 'You Can Drive'}
+                              'LIN': 'LINK 4', 'MTU': 'MTU', 'PRO': 'Proama', 'PZU': 'PZU', 'RIS': 'InterRisk',
+                              'TUW': 'TUW', 'TUZ': 'TUZ', 'UNI': 'Uniqa', 'WAR': 'Warta', 'WIE': 'Wiener',
+                              'YCD': 'You Can Drive'}
                         self.tu = di.get(self.tu)
 
                         yield self.termin_płatności
@@ -491,15 +492,23 @@ class MailingRaty:
            <tr>
 
              <td class="m_-8810930916023015007user-msg user-msg">
-
 """
 
             html = TEXT
-            text = 'MAGRO Ubezpieczenia Sp. z o.o.'
+            text = f"""
+Przypomnienie o płatności raty.\n
+Dnia {str(self.termin_płatności)} upływa termin wpłaty raty za polisę.\n
+Polisa nr.:  {str(self.nr_polisy)} - T.U. {self.tu}
+Kwota: {str(self.kwota)} zł
+{str(self.marka)} {str(self.model)}{dash} {str(self.nr_rej)} {comma_year} {str(self.rok_prod)}\n
+Prosimy o terminową wpłatę,
+ubezpieczenia-magro.pl
+MAGRO Ubezpieczenia Sp. z o.o.
+"""
 
             mail = MIMEMultipart('alternative')
             mail['From'] = 'przypomnienia@ubezpieczenia-magro.pl'
-            mail['To'] = self.email  # Do prob zmienic email
+            mail['To'] = 'robert.patryk.grzelak@gmail.com' # self.email  # Do prob zmienic email
             mail['Cc'] = 'ubezpieczenia.magro@gmail.com'
             mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
 
@@ -597,7 +606,7 @@ class MailingOdn:
                         if self.rozlicz in d:
                             self.rozlicz = d.get(self.rozlicz)
                         else:
-                            self.rozlicz = 'naszym biurem,<br>' \
+                            self.rozlicz = 'naszym biurem,\n' \
                                            'tel. 602 752 893 lub 42 637 19 97'
 
 
@@ -1023,7 +1032,7 @@ class MailingOdn:
                        + str(self.marka) + ' ' + str(self.model) + dash + str(self.przedmiot_ub) + comma_year + str(self.rok_prod) + \
                        """<br><br><br>W sprawie odnowienia prosimy o kontakt<br>z """ + str(self.rozlicz) + \
                        """.<br><br><br><br> 
-                                   ubezpieczenia-magro.pl/kalkulatorOC
+                                   <a href="ubezpieczenia-magro.pl/kalkulatorOC">Kalkulator ubezpieczenia OC</a>
        </td>
      </tr>
      <tr>
@@ -1032,15 +1041,22 @@ class MailingOdn:
            <tr>
 
              <td class="m_-8810930916023015007user-msg user-msg">
-
     """
 
             html = TEXT
-            text = 'MAGRO Ubezpieczenia Sp. z o.o.'
+            text = f"""
+Przypomnienie o końcu ochrony.\n
+Dnia {str(self.koniec_okresu_bez_sec)} dobiega końca Twoja polisa ubezpieczeniowa.\n
+Polisa nr.: {str(self.nr_polisy)} - T.U. {self.tu}
+{str(self.marka)} {str(self.model)} {dash} {str(self.przedmiot_ub)} {comma_year} {str(self.rok_prod)}\n
+W sprawie odnowienia prosimy o kontakt\nz {str(self.rozlicz)}.\n
+ubezpieczenia-magro.pl/kalkulatorOC\n
+MAGRO Ubezpieczenia Sp. z o.o.
+"""
 
             mail = MIMEMultipart('alternative')
             mail['From'] = 'przypomnienia@ubezpieczenia-magro.pl'
-            mail['To'] = self.email  # Do prob zmienic email
+            mail['To'] = 'robert.patryk.grzelak@gmail.com'  # self.email  # Do prob zmienic email
             mail['Cc'] = 'ubezpieczenia.magro@gmail.com'
             mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
 

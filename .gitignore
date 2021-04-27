@@ -14,3 +14,4 @@ proby_wysylki.py
 *.exe
 mail_Baza.py
 fine_template.py
+cron.log
