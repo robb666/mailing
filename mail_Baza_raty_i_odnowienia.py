@@ -16,8 +16,8 @@ print('\n' * 4 + 'MAILING - Przypomnienia o ratach - szuka' + '.' * 3)
 
 class MailingRaty:
 
-    def __init__(self, text):
-        self.text = text
+    def __init__(self, TEXT):
+        self.text = TEXT
         # self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsx", read_only=True)
         self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=10.0.0.4,share=e/Agent baza/2014 BAZA MAGRO.xlsx",
                                 read_only=True)
@@ -94,16 +94,12 @@ class MailingRaty:
 
             SUBJECT = "Przypomnienie o płatności raty."
             text_html = f"""
-               <center>
-                 <table cellspacing="0" cellpadding="0" width="600" class="w320">
-                   <tr>
-                     <td class="header-lg">
-                       {SUBJECT}
-                     </td>
-                   </tr>
-                   <tr>
-                     <td class="free-text">
-                    {self.text}<br>
+                        {self.text}
+                    {SUBJECT}
+                 </td>
+               </tr>
+               <tr>
+                 <td class="free-text"><br>
                     Dnia {str(self.termin_płatności)} upływa termin wpłaty raty za polisę.<br>
                     Polisa nr.: {str(self.nr_polisy)} - T.U. {self.tu}<br> 
                     Kwota: {str(self.kwota)} zł<br> 
@@ -147,7 +143,7 @@ class MailingRaty:
             server.starttls()
             server.login('przypomnienia@ubezpieczenia-magro.pl', passw)
             # server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
-            server.sendmail('przypomnienia@ubezpieczenia-magro.pl', ['magro@ubezpieczenia-magro.pl'], msg_full)  # Do prob
+            server.sendmail('przypomnienia@ubezpieczenia-magro.pl', ['ubezpieczenia.magro@gmail.com'], msg_full)  # Do prob
             server.quit()
             print()
             if self.email is not None:
@@ -531,21 +527,19 @@ TEXT = """
            </tr>
            <tr>
              <td align="center" valign="top" width="100%" style="background-color: #f7f7f7;" class="content-padding">
-                                      <tr>
-             <td align="center" valign="top" width="100%" style="background-color: #f7f7f7;" class="content-padding">
                <center>
                  <table cellspacing="0" cellpadding="0" width="600" class="w320">
                    <tr>
                      <td class="header-lg">"""
 
 
-raty = MailingRaty(TEXT)
-raty.read_excel()
-raty.select_cells()
-raty.iterate_funct()
-
-end_time = time.time() - start_time
-print('\nCzas wykonania: {:.0f} sekund'.format(end_time))
+# raty = MailingRaty(TEXT)
+# raty.read_excel()
+# raty.select_cells()
+# raty.iterate_funct()
+#
+# end_time = time.time() - start_time
+# print('\nCzas wykonania: {:.0f} sekund'.format(end_time))
 
 ########################################################################################################################
 
@@ -616,7 +610,7 @@ class MailingOdn:
                         if self.rozlicz in d:
                             self.rozlicz = d.get(self.rozlicz)
                         else:
-                            self.rozlicz = 'naszym biurem,\n' \
+                            self.rozlicz = 'naszym biurem,<br>' \
                                            'tel. 602 752 893 lub 42 637 19 97'
 
                         di = {'ALL': 'Allianz', 'AXA': 'AXA', 'COM': 'Compensa', 'EPZU': 'PZU', 'GEN': 'Generali',
@@ -630,7 +624,7 @@ class MailingOdn:
 
 
     def iterate_funct_odn(self):
-        for i in self.select_cells_odn():
+        for _ in self.select_cells_odn():
             print()
             print('Data końca polisy: ' + self.koniec_okresu_bez_sec)
             print('Marka/kod poczt: ' + str(self.marka))
@@ -653,29 +647,28 @@ class MailingOdn:
                 comma_year = ''
 
             SUBJECT = "Przypomnienie o końcu ochrony."
-            TEXT = f"""
-
-                       {SUBJECT}
-                     </td>
-                   </tr>
-                   <tr>
-                     <td class="free-text">
-            """ + \
-                self.text + """<br>
-              Dnia """ + str(self.koniec_okresu_bez_sec) + ' dobiega końca Twoja polisa ubezpieczeniowa.<br>' + \
-              'Polisa nr.:  ' + str(self.nr_polisy) + " - T.U. " + self.tu + '<br>' \
-               + str(self.marka) + ' ' + str(self.model) + dash + str(self.przedmiot_ub) + comma_year + str(self.rok_prod) + \
-               """<br><br><br>W sprawie odnowienia prosimy o kontakt<br>z """ + str(self.rozlicz) + \
-               """.<br><br><br><br> 
-                           <a href="ubezpieczenia-magro.pl/kalkulatorOC">Kalkulator ubezpieczenia OC</a>
-       </td>
-     </tr>
-     <tr>
-       <td class="mini-block-container">
-         <table cellspacing="0" cellpadding="0" width="100%"  style="border-collapse:separate !important;">
+            TEXT = f"""{self.text}
+                    {SUBJECT}
+             </td>
+           </tr>
            <tr>
-
-             <td class="m_-8810930916023015007user-msg user-msg">
+             <td class="free-text">
+            <br>
+                Dnia {str(self.koniec_okresu_bez_sec)} dobiega końca Twoja polisa ubezpieczeniowa.<br>
+                Polisa nr.: {str(self.nr_polisy)} - T.U. {self.tu}<br>
+                {str(self.marka)} {str(self.model)} {dash} {str(self.przedmiot_ub)}{comma_year} {str(self.rok_prod)}
+                <br><br><br>W sprawie odnowienia prosimy o kontakt<br>z {str(self.rozlicz)}<br>
+                <a href="ubezpieczenia.magro@gmail.com" style="font-size: 16px">ubezpieczenia.magro@gmail.com</a>
+                <br><br><br>
+                <a href="ubezpieczenia-magro.pl/kalkulatorOC">Kalkulator ubezpieczenia OC</a>
+           </td>
+         </tr>
+         <tr>
+           <td class="mini-block-container">
+             <table cellspacing="0" cellpadding="0" width="100%"  style="border-collapse:separate !important;">
+               <tr>
+    
+                 <td class="m_-8810930916023015007user-msg user-msg">
     """
 
             html = TEXT
@@ -684,7 +677,9 @@ Przypomnienie o końcu ochrony.\n
 Dnia {str(self.koniec_okresu_bez_sec)} dobiega końca Twoja polisa ubezpieczeniowa.\n
 Polisa nr.: {str(self.nr_polisy)} - T.U. {self.tu}
 {str(self.marka)} {str(self.model)} {dash} {str(self.przedmiot_ub)} {comma_year} {str(self.rok_prod)}\n
-W sprawie odnowienia prosimy o kontakt\nz {str(self.rozlicz)}.\n
+W sprawie odnowienia prosimy o kontakt\n
+z {str(self.rozlicz)}.\n
+ubezpieczenia.magro@gmail.com\n
 ubezpieczenia-magro.pl/kalkulatorOC\n
 MAGRO Ubezpieczenia Sp. z o.o.
 """
@@ -704,9 +699,9 @@ MAGRO Ubezpieczenia Sp. z o.o.
             server.starttls()
             server.login('przypomnienia@ubezpieczenia-magro.pl', passw)
             # server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
-            server.sendmail('przypomnienia@ubezpieczenia-magro.pl', ['magro@ubezpieczenia-magro.pl'], msg_full)  # do prob
+            server.sendmail('przypomnienia@ubezpieczenia-magro.pl', ['ubezpieczenia.magro@gmail.com'], msg_full)  # do prob
             server.quit()
-            print()
+
             if self.email is not None:
                 print('Wysłane przypomnienia o końcu polis!')
             if self.email == '':
