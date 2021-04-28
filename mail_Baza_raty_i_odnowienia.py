@@ -4,6 +4,8 @@ import datetime
 import time
 import re
 import smtplib
+from email import encoders
+from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from l_h_mailing import passw
@@ -105,7 +107,9 @@ class MailingRaty:
                     Kwota: {str(self.kwota)} zł<br> 
                     {str(self.marka)} {str(self.model)} {dash} {str(self.nr_rej)}{comma_year} {str(self.rok_prod)}<br>
                     <br><br>Prosimy o terminową wpłatę,<br>
-                    <a href="ubezpieczenia-magro.pl">www.ubezpieczenia-magro.pl</a>
+                    <a href="ubezpieczenia-magro.pl">www.ubezpieczenia-magro.pl</a><br><br>
+                    Zapraszamy do zapoznania sie z naszą ofertą ubezpieczeń na życie.<br>
+                    Szczegóły w załącznikch.
                </td>
              </tr>
              <tr>
@@ -126,13 +130,25 @@ class MailingRaty:
                     Prosimy o terminową wpłatę,
                     ubezpieczenia-magro.pl
                     MAGRO Ubezpieczenia Sp. z o.o.
+                    Zapraszamy do zapoznania sie z naszą ofertą ubezpieczeń na życie.\n
+                    Szczegóły w załącznikch.
                     """
 
             mail = MIMEMultipart('alternative')
+            mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
             mail['From'] = 'przypomnienia@ubezpieczenia-magro.pl'
             mail['To'] = self.email  # Do prob zmienic email
             mail['Cc'] = 'ubezpieczenia.magro@gmail.com'
-            mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
+
+            ulotka_gen = 'Generali_GO_PLUS.pdf'
+            ulotka_war = 'Warta_WDCIR.pdf'
+            for attachment in ulotka_gen, ulotka_war:
+                my_file = MIMEBase('application', 'pdf')
+                with open(attachment, 'rb') as f:
+                    my_file.set_payload(f.read())
+                    my_file.add_header('Content-Disposition', f'attachment; filename = {attachment}', )
+                    encoders.encode_base64(my_file)
+                    mail.attach(my_file)
 
             part1 = MIMEText(text_alt, 'plain')
             part2 = MIMEText(html, 'html')
@@ -593,7 +609,6 @@ class MailingOdn:
             self.kwota = kwota.value
             self.nr_raty = nr_raty
 
-            # yield self.data_raty
             yield self.koniec
 
 
@@ -668,9 +683,11 @@ class MailingOdn:
                 Dnia {str(self.koniec_okresu_bez_sec)} dobiega końca Twoja polisa ubezpieczeniowa.<br>
                 Polisa nr.: {str(self.nr_polisy)} - T.U. {self.tu}<br>
                 {str(self.marka)} {str(self.model)} {dash} {str(self.przedmiot_ub)}{comma_year} {str(self.rok_prod)}
-                <br><br>W sprawie odnowienia prosimy o kontakt<br>z {str(self.rozlicz)}<br>
-                <br><br><br><br>
-                <a href="ubezpieczenia-magro.pl/kalkulatorOC">Kalkulator ubezpieczenia OC</a>
+                <br><br>W sprawie odnowienia prosimy o kontakt<br>z {str(self.rozlicz)}<br><br><br><br>
+                <a href="ubezpieczenia-magro.pl/kalkulatorOC">Kalkulator ubezpieczenia OC</a><br><br>
+                Zapraszamy do zapoznania sie z naszą ofertą ubezpieczeń na życie.<br>
+                Szczegóły w załącznikch.
+               </td>
            </td>
          </tr>
          <tr>
@@ -690,14 +707,26 @@ Polisa nr.: {str(self.nr_polisy)} - T.U. {self.tu}
 W sprawie odnowienia prosimy o kontakt\n
 z {os_do_kontaktu}.\n
 ubezpieczenia-magro.pl/kalkulatorOC\n
-MAGRO Ubezpieczenia Sp. z o.o.
+MAGRO Ubezpieczenia Sp. z o.o.\n
+Zapraszamy do zapoznania sie z naszą ofertą ubezpieczeń na życie.\n
+Szczegóły w załącznikch.
 """
 
             mail = MIMEMultipart('alternative')
+            mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
             mail['From'] = 'przypomnienia@ubezpieczenia-magro.pl'
             mail['To'] = self.email  # Do prob zmienic email
             mail['Cc'] = 'ubezpieczenia.magro@gmail.com'
-            mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
+
+            ulotka_gen = 'Generali_GO_PLUS.pdf'
+            ulotka_war = 'Warta_WDCIR.pdf'
+            for attachment in ulotka_gen, ulotka_war:
+                my_file = MIMEBase('application', 'pdf')
+                with open(attachment, 'rb') as f:
+                    my_file.set_payload(f.read())
+                    my_file.add_header('Content-Disposition', f'attachment; filename = {attachment}', )
+                    encoders.encode_base64(my_file)
+                    mail.attach(my_file)
 
             part1 = MIMEText(text_alt, 'plain')
             part2 = MIMEText(html, 'html')
@@ -724,4 +753,4 @@ raty.iterate_funct_odn()
 
 end_time = time.time() - start_time
 print('\nCzas wykonania: {:.0f} sekund'.format(end_time))
-time.sleep(10)
+time.sleep(1)
