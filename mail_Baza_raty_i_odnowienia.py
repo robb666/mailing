@@ -13,7 +13,7 @@ from l_h_mailing import passw
 
 start_time = time.time()
 now = datetime.now().strftime("Wysłane dnia %d.%m.%Y o godzinie %H:%M:%S")
-print('\n' * 4 + 'MAILING - Przypomnienia o ratach - szuka' + '.' * 3 + f'\n{now}')
+print('\n' * 3 + '-' * 43 + '\n' + 'MAILING - Przypomnienia o ratach - szuka' + '.' * 3 + f'\n{now}')
 
 
 class MailingRaty:
