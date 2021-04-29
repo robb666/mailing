@@ -1,6 +1,6 @@
 from openpyxl import load_workbook
-from datetime import date, timedelta
-import datetime
+from datetime import date, datetime, timedelta
+# import datetime
 import time
 import re
 import smtplib
@@ -10,10 +10,10 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from l_h_mailing import passw
 
+
 start_time = time.time()
-
-
-print('\n' * 4 + 'MAILING - Przypomnienia o ratach - szuka' + '.' * 3)
+now = datetime.now().strftime("Wysłane dnia %d.%m.%Y o godzinie %H:%M:%S")
+print('\n' * 4 + 'MAILING - Przypomnienia o ratach - szuka' + '.' * 3 + f'\n{now}')
 
 
 class MailingRaty:
@@ -60,7 +60,7 @@ class MailingRaty:
                     re.search('[AWV()=.]', str(self.data_raty)):
                 data_r = str(self.data_raty)
                 self.termin_płatności = data_r[:10]
-                if datetime.datetime.strptime(str(self.termin_płatności), '%Y-%m-%d').date() == self.week_period and \
+                if datetime.strptime(str(self.termin_płatności), '%Y-%m-%d').date() == self.week_period and \
                         int(self.nr_raty.value) > 1:
                     if self.email is not None and self.rodz_ub != 'życ':
                         di = {'ALL': 'Allianz', 'AXA': 'AXA', 'COM': 'Compensa', 'EPZU': 'PZU', 'GEN': 'Generali',
@@ -561,8 +561,8 @@ print('\nCzas wykonania: {:.0f} sekund'.format(end_time))
 
 start_time = time.time()
 
-print()
-print('\n' * 4 + 'MAILING - Przypomnienia o wznowieniach - szuka' + '.' * 3)
+now = datetime.now().strftime("Wysłane dnia %d.%m.%Y o godzinie %H:%M:%S")
+print('\n' * 4 + 'MAILING - Przypomnienia o wznowieniach - szuka' + '.' * 3 + f'\n{now}')
 
 
 class MailingOdn:
@@ -620,7 +620,7 @@ class MailingOdn:
 
                 koniec_okresu = str(self.koniec)
                 self.koniec_okresu_bez_sec = koniec_okresu[:10]
-                if datetime.datetime.strptime(str(self.koniec_okresu_bez_sec), '%Y-%m-%d').date() == self.week_period_odn:
+                if datetime.strptime(str(self.koniec_okresu_bez_sec), '%Y-%m-%d').date() == self.week_period_odn:
                     if self.email is not None and self.rodz_ub != 'życ' and self.przypis is not None:
 
                         d = {'Filipiak': 'Ultimatum, tel. 694888197',
