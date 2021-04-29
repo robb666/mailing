@@ -560,9 +560,8 @@ print('\nCzas wykonania: {:.0f} sekund'.format(end_time))
 ########################################################################################################################
 
 start_time = time.time()
-
 now = datetime.now().strftime("Wysłane dnia %d.%m.%Y o godzinie %H:%M:%S")
-print('\n' * 4 + 'MAILING - Przypomnienia o wznowieniach - szuka' + '.' * 3 + f'\n{now}')
+print('\n' * 3 + 'MAILING - Przypomnienia o wznowieniach - szuka' + '.' * 3 + f'\n{now}')
 
 
 class MailingOdn:
