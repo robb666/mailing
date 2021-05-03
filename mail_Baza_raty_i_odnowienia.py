@@ -1,3 +1,5 @@
+
+import os
 from openpyxl import load_workbook
 from datetime import date, datetime, timedelta
 # import datetime
@@ -12,7 +14,8 @@ from l_h_mailing import passw
 
 
 start_time = time.time()
-now = datetime.now().strftime("Wysłane dnia %d.%m.%Y o godzinie %H:%M:%S")
+os.chdir('/home/robb/Desktop/PROJEKTY/mailing')
+now = datetime.now().strftime("Dnia %d.%m.%Y godzina %H:%M:%S")
 print('\n' * 3 + '-' * 43 + '\n' + 'MAILING - Przypomnienia o ratach - szuka' + '.' * 3 + f'\n{now}')
 
 
@@ -133,7 +136,7 @@ class MailingRaty:
                     Zapraszamy do zapoznania sie z naszą ofertą ubezpieczeń na życie.\n
                     Szczegóły w załącznikch.
                     """
-
+            print('PRZESZEDŁ HTML')
             mail = MIMEMultipart('alternative')
             mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
             mail['From'] = 'przypomnienia@ubezpieczenia-magro.pl'
@@ -149,7 +152,7 @@ class MailingRaty:
                     my_file.add_header('Content-Disposition', f'attachment; filename = {attachment}', )
                     encoders.encode_base64(my_file)
                     mail.attach(my_file)
-
+            print('PRZESZEDŁ ZAŁĄCZNIKI!!!!')
             part1 = MIMEText(text_alt, 'plain')
             part2 = MIMEText(html, 'html')
             mail.attach(part1)
@@ -161,9 +164,9 @@ class MailingRaty:
             server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
             # server.sendmail('przypomnienia@ubezpieczenia-magro.pl', ['magro@ubezpieczenia-magro.pl'], msg_full)  # Do prob
             server.quit()
-            print()
+
             if self.email is not None:
-                print('Wysłane przypomnienia o nadchodzących ratach!')
+                print('\nWysłane przypomnienia o nadchodzących ratach!')
             else:
                 print('Brak adresu email')
 
@@ -560,7 +563,7 @@ print('\nCzas wykonania: {:.0f} sekund'.format(end_time))
 ########################################################################################################################
 
 start_time = time.time()
-now = datetime.now().strftime("Wysłane dnia %d.%m.%Y o godzinie %H:%M:%S")
+now = datetime.now().strftime("Dnia %d.%m.%Y godzina %H:%M:%S")
 print('\n' * 3 + 'MAILING - Przypomnienia o wznowieniach - szuka' + '.' * 3 + f'\n{now}')
 
 
@@ -740,7 +743,7 @@ Szczegóły w załącznikch.
             server.quit()
 
             if self.email is not None:
-                print('Wysłane przypomnienia o końcu polis!')
+                print('\nWysłane przypomnienia o końcu polis!')
             if self.email == '':
                 print('Brak adresu email')
 
