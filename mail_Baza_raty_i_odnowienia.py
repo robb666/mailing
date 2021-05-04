@@ -136,7 +136,7 @@ class MailingRaty:
                     Zapraszamy do zapoznania sie z naszą ofertą ubezpieczeń na życie.\n
                     Szczegóły w załącznikch.
                     """
-            print('PRZESZEDŁ HTML')
+
             mail = MIMEMultipart('alternative')
             mail['Subject'] = 'MAGRO Ubezpieczenia Sp. z o.o.'
             mail['From'] = 'przypomnienia@ubezpieczenia-magro.pl'
@@ -152,7 +152,7 @@ class MailingRaty:
                     my_file.add_header('Content-Disposition', f'attachment; filename = {attachment}', )
                     encoders.encode_base64(my_file)
                     mail.attach(my_file)
-            print('PRZESZEDŁ ZAŁĄCZNIKI!!!!')
+
             part1 = MIMEText(text_alt, 'plain')
             part2 = MIMEText(html, 'html')
             mail.attach(part1)
