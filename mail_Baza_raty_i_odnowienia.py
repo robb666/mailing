@@ -24,8 +24,8 @@ class MailingRaty:
     def __init__(self, TEXT):
         self.text = TEXT
         # self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsx", read_only=True)
-        self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=10.0.0.4,share=e/Agent baza/2014 BAZA MAGRO.xlsx",
-                                read_only=True)
+        self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=192.168.1.12,share=e"
+                                         "/Agent baza/2014 BAZA MAGRO.xlsx", read_only=True)
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['T4178':f'BA{self.ws.max_row}']
         today = date.today()
@@ -552,10 +552,10 @@ TEXT = """
                      <td class="header-lg">"""
 
 
-raty = MailingRaty(TEXT)
-raty.read_excel()
-raty.select_cells()
-raty.iterate_funct()
+# raty = MailingRaty(TEXT)
+# raty.read_excel()
+# raty.select_cells()
+# raty.iterate_funct()
 
 end_time = time.time() - start_time
 print('\nCzas wykonania: {:.0f} sekund'.format(end_time))
@@ -572,8 +572,8 @@ class MailingOdn:
     def __init__(self, TEXT):
         self.text = TEXT
         # self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsx", read_only=True)
-        self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=10.0.0.4,share=e/Agent baza/2014 BAZA MAGRO.xlsx",
-                                read_only=True)
+        self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=192.168.1.12,share=e/Agent baza/"
+                                         "2014 BAZA MAGRO.xlsx", read_only=True)
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['G4178':f'BA{self.ws.max_row}']
         today = date.today()
@@ -735,7 +735,7 @@ Szczegóły w załącznikch.
             mail.attach(part1)
             mail.attach(part2)
             msg_full = mail.as_string().encode('utf-8')
-            server = smtplib.SMTP('ubezpieczenia-magro.pl', 25)
+            server = smtplib.SMTP('ubezpieczenia-magro.pl', 587)
             server.starttls()
             server.login('przypomnienia@ubezpieczenia-magro.pl', passw)
             server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
