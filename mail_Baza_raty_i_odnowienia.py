@@ -552,10 +552,10 @@ TEXT = """
                      <td class="header-lg">"""
 
 
-# raty = MailingRaty(TEXT)
-# raty.read_excel()
-# raty.select_cells()
-# raty.iterate_funct()
+raty = MailingRaty(TEXT)
+raty.read_excel()
+raty.select_cells()
+raty.iterate_funct()
 
 end_time = time.time() - start_time
 print('\nCzas wykonania: {:.0f} sekund'.format(end_time))
