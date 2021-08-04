@@ -1,2 +1,2 @@
 # mailing
-Sending HTML emails as reminders about installments and insurance policies renewals.
+Sending HTML emails as reminders about insurance policies installments and renewals.
