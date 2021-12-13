@@ -636,7 +636,7 @@ class MailingOdn:
                             self.rozlicz = d.get(self.rozlicz)
                         else:
                             self.rozlicz = 'naszym biurem,<br>' \
-                                           'tel. 602 752 893 lub 42 637 19 97<br>\n' \
+                                           'tel. 602 752 893<br>\n' \
                                            '<a href="ubezpieczenia.magro@gmail.com" style="font-size: 16px">' \
                                            'ubezpieczenia.magro@gmail.com</a>'
 
