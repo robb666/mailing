@@ -110,9 +110,7 @@ class MailingRaty:
                     Kwota: {str(self.kwota)} zł<br> 
                     {str(self.marka)} {str(self.model)} {dash} {str(self.nr_rej)}{comma_year} {str(self.rok_prod)}<br>
                     <br><br>Prosimy o terminową wpłatę,<br>
-                    <a href="ubezpieczenia-magro.pl">www.ubezpieczenia-magro.pl</a><br><br>
-                    Zapraszamy do zapoznania sie z naszą ofertą ubezpieczeń na życie.<br>
-                    Szczegóły w załącznikch.
+                    <a href="ubezpieczenia-magro.pl">ubezpieczenia-magro.pl</a><br><br>
                </td>
              </tr>
              <tr>
@@ -133,8 +131,6 @@ class MailingRaty:
                     Prosimy o terminową wpłatę,
                     ubezpieczenia-magro.pl
                     MAGRO Ubezpieczenia Sp. z o.o.
-                    Zapraszamy do zapoznania sie z naszą ofertą ubezpieczeń na życie.\n
-                    Szczegóły w załącznikch.
                     """
 
             mail = MIMEMultipart('alternative')
@@ -143,15 +139,15 @@ class MailingRaty:
             mail['To'] = self.email  # Do prob zmienic email
             mail['Cc'] = 'ubezpieczenia.magro@gmail.com'
 
-            ulotka_gen = 'Generali_GO_PLUS.pdf'
-            ulotka_war = 'Warta_WDCIR.pdf'
-            for attachment in ulotka_gen, ulotka_war:
-                my_file = MIMEBase('application', 'pdf')
-                with open(attachment, 'rb') as f:
-                    my_file.set_payload(f.read())
-                    my_file.add_header('Content-Disposition', f'attachment; filename = {attachment}', )
-                    encoders.encode_base64(my_file)
-                    mail.attach(my_file)
+            # ulotka_gen = 'Generali_GO_PLUS.pdf'
+            # ulotka_war = 'Warta_WDCIR.pdf'
+            # for attachment in ulotka_gen, ulotka_war:
+            #     my_file = MIMEBase('application', 'pdf')
+            #     with open(attachment, 'rb') as f:
+            #         my_file.set_payload(f.read())
+            #         my_file.add_header('Content-Disposition', f'attachment; filename = {attachment}', )
+            #         encoders.encode_base64(my_file)
+            #         mail.attach(my_file)
 
             part1 = MIMEText(text_alt, 'plain')
             part2 = MIMEText(html, 'html')
@@ -687,8 +683,6 @@ class MailingOdn:
                 {str(self.marka)} {str(self.model)} {dash} {str(self.przedmiot_ub)}{comma_year} {str(self.rok_prod)}
                 <br><br>W sprawie odnowienia prosimy o kontakt<br>z {str(self.rozlicz)}<br><br><br><br>
                 <a href="ubezpieczenia-magro.pl/kalkulatorOC">Kalkulator ubezpieczenia OC</a><br><br>
-                Zapraszamy do zapoznania sie z naszą ofertą ubezpieczeń na życie.<br>
-                Szczegóły w załącznikch.
                </td>
            </td>
          </tr>
@@ -710,8 +704,6 @@ W sprawie odnowienia prosimy o kontakt\n
 z {os_do_kontaktu}.\n
 ubezpieczenia-magro.pl/kalkulatorOC\n
 MAGRO Ubezpieczenia Sp. z o.o.\n
-Zapraszamy do zapoznania sie z naszą ofertą ubezpieczeń na życie.\n
-Szczegóły w załącznikch.
 """
 
             mail = MIMEMultipart('alternative')
@@ -720,15 +712,15 @@ Szczegóły w załącznikch.
             mail['To'] = self.email  # Do prob zmienic email
             mail['Cc'] = 'ubezpieczenia.magro@gmail.com'
 
-            ulotka_gen = 'Generali_GO_PLUS.pdf'
-            ulotka_war = 'Warta_WDCIR.pdf'
-            for attachment in ulotka_gen, ulotka_war:
-                my_file = MIMEBase('application', 'pdf')
-                with open(attachment, 'rb') as f:
-                    my_file.set_payload(f.read())
-                    my_file.add_header('Content-Disposition', f'attachment; filename = {attachment}', )
-                    encoders.encode_base64(my_file)
-                    mail.attach(my_file)
+            # ulotka_gen = 'Generali_GO_PLUS.pdf'
+            # ulotka_war = 'Warta_WDCIR.pdf'
+            # for attachment in ulotka_gen, ulotka_war:
+            #     my_file = MIMEBase('application', 'pdf')
+            #     with open(attachment, 'rb') as f:
+            #         my_file.set_payload(f.read())
+            #         my_file.add_header('Content-Disposition', f'attachment; filename = {attachment}', )
+            #         encoders.encode_base64(my_file)
+            #         mail.attach(my_file)
 
             part1 = MIMEText(text_alt, 'plain')
             part2 = MIMEText(html, 'html')
