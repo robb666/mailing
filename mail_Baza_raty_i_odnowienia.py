@@ -66,11 +66,11 @@ class MailingRaty:
                 if datetime.strptime(str(self.termin_płatności), '%Y-%m-%d').date() == self.week_period and \
                         int(self.nr_raty.value) > 1:
                     if self.email is not None and self.rodz_ub != 'życ':
-                        di = {'ALL': 'Allianz', 'AXA': 'AXA', 'COM': 'Compensa', 'EPZU': 'PZU', 'GEN': 'Generali',
-                              'GOT': 'Gothaer', 'HDI': 'HDI', 'HES': 'Ergo Hestia', 'IGS': 'IGS', 'INT': 'INTER',
-                              'LIN': 'LINK 4', 'MTU': 'MTU', 'PRO': 'Proama', 'PZU': 'PZU', 'RIS': 'InterRisk',
-                              'TUW': 'TUW', 'TUZ': 'TUZ', 'UNI': 'Uniqa', 'WAR': 'Warta', 'WIE': 'Wiener',
-                              'YCD': 'You Can Drive'}
+                        di = {'ALL': 'Allianz', 'AXA': 'AXA', 'BAL': 'Balcia', 'COM': 'Compensa', 'EIN': 'Euroins',
+                              'EPZU': 'PZU', 'GEN': 'Generali', 'GOT': 'Gothaer', 'HDI': 'HDI', 'HES': 'Ergo Hestia',
+                              'IGS': 'IGS', 'INT': 'INTER', 'LIN': 'LINK 4', 'MTU': 'MTU', 'PRO': 'Proama',
+                              'PZU': 'PZU', 'RIS': 'InterRisk', 'TUW': 'TUW', 'TUZ': 'TUZ', 'UNI': 'Uniqa',
+                              'WAR': 'Warta', 'WIE': 'Wiener', 'YCD': 'You Can Drive'}
                         self.tu = di.get(self.tu)
 
                         yield self.termin_płatności
@@ -636,12 +636,12 @@ class MailingOdn:
                                            '<a href="ubezpieczenia.magro@gmail.com" style="font-size: 16px">' \
                                            'ubezpieczenia.magro@gmail.com</a>'
 
-                        di = {'ALL': 'Allianz', 'AXA': 'AXA', 'COM': 'Compensa', 'EPZU': 'PZU', 'GEN': 'Generali',
-                              'GOT': 'Gothaer', 'HDI': 'HDI', 'HES': 'Ergo Hestia', 'IGS': 'IGS', 'INT': 'INTER',
-                              'LIN': 'LINK 4', 'MTU': 'MTU', 'PRO': 'Proama', 'PZU': 'PZU', 'RIS': 'InterRisk',
-                              'TUW': 'TUW', 'TUZ': 'TUZ', 'UNI': 'Uniqa', 'WAR': 'Warta', 'WIE': 'Wiener',
-                              'YCD': 'You Can Drive'
-                              }
+                        di = {'ALL': 'Allianz', 'AXA': 'AXA', 'BAL': 'Balcia', 'COM': 'Compensa', 'EIN': 'Euroins',
+                              'EPZU': 'PZU', 'GEN': 'Generali', 'GOT': 'Gothaer', 'HDI': 'HDI', 'HES': 'Ergo Hestia',
+                              'IGS': 'IGS', 'INT': 'INTER', 'LIN': 'LINK 4', 'MTU': 'MTU', 'PRO': 'Proama',
+                              'PZU': 'PZU', 'RIS': 'InterRisk', 'TUW': 'TUW', 'TUZ': 'TUZ', 'UNI': 'Uniqa',
+                              'WAR': 'Warta', 'WIE': 'Wiener', 'YCD': 'You Can Drive'}
+
                         self.tu = di.get(self.tu)
 
                         yield self.koniec_okresu_bez_sec
