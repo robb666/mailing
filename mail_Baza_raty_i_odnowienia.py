@@ -19,6 +19,7 @@ now = datetime.now().strftime("Dnia %d.%m.%Y godzina %H:%M:%S")
 print('\n' * 3 + '-' * 43 + '\n' + 'MAILING - Przypomnienia o ratach - szuka' + '.' * 3 + f'\n{now}')
 
 
+
 class MailingRaty:
 
     def __init__(self, TEXT):
@@ -154,7 +155,7 @@ class MailingRaty:
             mail.attach(part1)
             mail.attach(part2)
             msg_full = mail.as_string().encode('utf-8')
-            server = smtplib.SMTP('ubezpieczenia-magro.pl', 587)
+            server = smtplib.SMTP('s124.cyber-folks.pl', 587)
             server.starttls()
             server.login('przypomnienia@ubezpieczenia-magro.pl', passw)
             server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
@@ -573,7 +574,7 @@ class MailingOdn:
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['G4178':f'BA{self.ws.max_row}']
         today = date.today()
-        self.week_period_odn = today - timedelta(-14)
+        self.week_period_odn = today - timedelta(-14)  # 14
 
     @staticmethod
     def remove_html_tags(txt):
@@ -727,7 +728,7 @@ MAGRO Ubezpieczenia Sp. z o.o.\n
             mail.attach(part1)
             mail.attach(part2)
             msg_full = mail.as_string().encode('utf-8')
-            server = smtplib.SMTP('ubezpieczenia-magro.pl', 587)
+            server = smtplib.SMTP('s124.cyber-folks.pl', 587)
             server.starttls()
             server.login('przypomnienia@ubezpieczenia-magro.pl', passw)
             server.sendmail('przypomnienia@ubezpieczenia-magro.pl', [self.email, 'ubezpieczenia.magro@gmail.com'], msg_full)
