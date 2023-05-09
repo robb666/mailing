@@ -521,7 +521,7 @@ TEXT = """
                          <table cellpadding="0" cellspacing="0" width="600" class="w320">
                            <tr>
                              <td class="pull-left mobile-header-padding-left" style="vertical-align: middle;">
-                               <a href="" class="logo">MAGRO<!--<img width="137" height="47" src="http://s3.amazonaws.com/swu-filepicker/0zxBZVuORSxdc9ZCqotL_logo_03.gif" alt="logo">--></a>
+                               <a href="https://ubezpieczenia-magro.pl/" class="logo">MAGRO<!--<img width="137" height="47" src="http://s3.amazonaws.com/swu-filepicker/0zxBZVuORSxdc9ZCqotL_logo_03.gif" alt="logo">--></a>
                              </td>
                              <td class="pull-right mobile-header-padding-right" style="color: #4d4d4d;">
 
