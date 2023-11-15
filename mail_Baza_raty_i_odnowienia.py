@@ -693,7 +693,7 @@ class MailingOdn:
                 Polisa nr.: {str(self.nr_polisy)} - T.U. {self.tu}<br>
                 {str(self.marka)} {str(self.model)} {dash} {str(self.przedmiot_ub)}{comma_year} {str(self.rok_prod)}
                 <br><br>W sprawie odnowienia prosimy o kontakt<br>z {str(self.rozlicz)}<br><br><br><br>
-                <a href="ubezpieczenia-magro.pl/kalkulatorOC">Kalkulator ubezpieczenia OC</a><br><br>
+                <a href="ubezpieczenia-magro.pl">ubezpieczenia-magro.pl</a><br><br>
                </td>
            </td>
          </tr>
