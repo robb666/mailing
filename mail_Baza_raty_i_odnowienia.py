@@ -622,20 +622,30 @@ class MailingOdn:
                 if datetime.strptime(str(self.koniec_okresu_bez_sec), '%Y-%m-%d').date() == self.week_period_odn:
                     if self.email is not None and self.rodz_ub != 'życ' and self.przypis is not None:
 
-                        d = {'Filipiak': 'Ultimatum, tel. 694888197',
-                             'Wawrzyniak': 'A. Wawrzyniak, tel. 691602675',
-                             'Wołowski': 'M. Wołowskim, tel. 692830084',
+                        d = {'Filipiak': 'Ultimatum, tel. 694888197<br>\n'
+                             '<a href="agencja@ultimatum-ubezpieczenia.pl" style="font-size: 16px">'
+                             'agencja@ultimatum-ubezpieczenia.pl</a>',
+
+                             'Wawrzyniak': 'A. Wawrzyniak, tel. 691602675<br>\n'
+                             '<a href="flipek99@interia.pl" style="font-size: 16px">'
+                             'flipek99@interia.pl</a>',
+
+                             'Wołowski': 'M. Wołowskim, tel. 692830084<br>\n'
+                             '<a href="marek.wolowski@ubezpieczenia-magro.pl" style="font-size: 16px">'
+                             'marek.wolowski@ubezpieczenia-magro.pl</a>',
+
                              'Robert': 'naszym biurem, tel. 572 810 576<br>\n'
                              '<a href="ubezpieczenia.magro@gmail.com" style="font-size: 16px">'
                              'ubezpieczenia.magro@gmail.com</a>',
                              }
+
                         if self.rozlicz in d:
                             self.rozlicz = d.get(self.rozlicz)
                         else:
                             self.rozlicz = 'naszym biurem,<br>' \
                                            'tel. 602 752 893<br>\n' \
-                                           '<a href="ubezpieczenia.magro@gmail.com" style="font-size: 16px">' \
-                                           'ubezpieczenia.magro@gmail.com</a>'
+                                           '<a href="magro@ubezpieczenia-magro.pl" style="font-size: 16px">' \
+                                           'magro@ubezpieczenia-magro.pl</a>'
 
                         di = {'ALL': 'Allianz', 'AXA': 'AXA', 'BAL': 'Balcia', 'COM': 'Compensa', 'EIN': 'Euroins',
                               'EPZU': 'PZU', 'GEN': 'Generali', 'GOT': 'Gothaer', 'HDI': 'HDI', 'HES': 'Ergo Hestia',
