@@ -14,7 +14,7 @@ from l_h_mailing import passw
 
 
 start_time = time.time()
-os.chdir('/home/robb/Desktop/PROJEKTY/mailing')
+os.chdir('/home/oobx/Desktop/PROJEKTY/mailing')
 now = datetime.now().strftime("Dnia %d.%m.%Y godzina %H:%M:%S")
 print('\n' * 3 + '-' * 43 + '\n' + 'MAILING - Przypomnienia o ratach - szuka' + '.' * 3 + f'\n{now}')
 
