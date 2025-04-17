@@ -27,7 +27,7 @@ class MailingRaty:
         # self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsm", read_only=True)
         # self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=js,share=e"
         #                                  "/Agent baza/2014 BAZA MAGRO.xlsm", read_only=True)
-        self.wb = load_workbook(filename="/mnt/pipboy_d/Agent baza/Login_Hasło.xlsm", read_only=True)
+        self.wb = load_workbook(filename="/mnt/pipboy_d/Agent baza/2014 BAZA MAGRO.xlsm", read_only=True)
 
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['T4178':f'BA{self.ws.max_row}']
@@ -571,7 +571,7 @@ class MailingOdn:
     def __init__(self, TEXT):
         self.text = TEXT
         # self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsm", read_only=True)
-        self.wb = load_workbook(filename="/mnt/pipboy_d/Agent baza/Login_Hasło.xlsm", read_only=True)
+        self.wb = load_workbook(filename="/mnt/pipboy_d/Agent baza/2014 BAZA MAGRO.xlsm", read_only=True)
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['G4178':f'BA{self.ws.max_row}']
         today = date.today()
