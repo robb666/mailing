@@ -18,25 +18,24 @@ os.chdir('/home/oobx/Desktop/PROJEKTY/mailing')
 now = datetime.now().strftime("Dnia %d.%m.%Y godzina %H:%M:%S")
 print('\n' * 3 + '-' * 43 + '\n' + 'MAILING - Przypomnienia o ratach - szuka' + '.' * 3 + f'\n{now}')
 
+MISSSED_REMINDERS = 0  # +1 is the previous day mailing
 
 
 class MailingRaty:
 
     def __init__(self, TEXT):
         self.text = TEXT
-        # self.wb = load_workbook(filename="M:/Agent baza/2014 BAZA MAGRO.xlsm", read_only=True)
-        # self.wb = load_workbook(filename="/run/user/1000/gvfs/smb-share:server=js,share=e"
-        #                                  "/Agent baza/2014 BAZA MAGRO.xlsm", read_only=True)
-        # filename = "/mnt/pipboy_d/Agent baza/2014 BAZA MAGRO.xlsm",
+
         self.wb = load_workbook(
-            # filename="/run/user/1000/gvfs/smb-share:server=192.168.1.22,share=d/Agent baza/2014 BAZA MAGRO.xlsm",
             filename="/mnt/magazyn_fujitsu/Agent baza/2014 BAZA MAGRO.xlsm",
+            # filename="/run/user/1000/gvfs/smb-share:server=192.168.1.22,share=d/Agent baza/2014 BAZA MAGRO.xlsm",
+            # filename="/mnt/pipboy_d/Agent baza/2014 BAZA MAGRO.xlsm",
             read_only=True)
 
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['T4178':f'BA{self.ws.max_row}']
         today = date.today()
-        self.week_period = today - timedelta(-5)  # -5
+        self.week_period = today - timedelta(-5 + MISSSED_REMINDERS)  # -5 przypomnienie na 5 dni przed
 
     def read_excel(self):
         for email, j1, j2, marka, model, nr_rej, rok_prod, SU, j3, j4, j5, pocz, j7, j8, j9, j10, j11, j12, tu, \
@@ -574,15 +573,16 @@ class MailingOdn:
 
     def __init__(self, TEXT):
         self.text = TEXT
+
         self.wb = load_workbook(
-            # filename="/run/user/1000/gvfs/smb-share:server=192.168.1.22,share=d/Agent baza/2014 BAZA MAGRO.xlsm",
             filename="/mnt/magazyn_fujitsu/Agent baza/2014 BAZA MAGRO.xlsm",
+            # filename="/run/user/1000/gvfs/smb-share:server=192.168.1.22,share=d/Agent baza/2014 BAZA MAGRO.xlsm",
             read_only=True)
-        # self.wb = load_workbook(filename="/mnt/pipboy_d/Agent baza/2014 BAZA MAGRO.xlsm", read_only=True)
+
         self.ws = self.wb['BAZA 2014']
         self.cells = self.ws['G4178':f'BA{self.ws.max_row}']
         today = date.today()
-        self.week_period_odn = today - timedelta(-14)  # 14
+        self.week_period_odn = today - timedelta(-14 + MISSSED_REMINDERS)  # 14 przypomnienie na dwa tygodnie przed
 
     @staticmethod
     def remove_html_tags(txt):
