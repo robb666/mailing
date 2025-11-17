@@ -29,7 +29,8 @@ class MailingRaty:
         #                                  "/Agent baza/2014 BAZA MAGRO.xlsm", read_only=True)
         # filename = "/mnt/pipboy_d/Agent baza/2014 BAZA MAGRO.xlsm",
         self.wb = load_workbook(
-            filename="/run/user/1000/gvfs/smb-share:server=192.168.1.22,share=d/Agent baza/2014 BAZA MAGRO.xlsm",
+            # filename="/run/user/1000/gvfs/smb-share:server=192.168.1.22,share=d/Agent baza/2014 BAZA MAGRO.xlsm",
+            filename="/mnt/magazyn_fujitsu/Agent baza/2014 BAZA MAGRO.xlsm",
             read_only=True)
 
         self.ws = self.wb['BAZA 2014']
@@ -574,7 +575,8 @@ class MailingOdn:
     def __init__(self, TEXT):
         self.text = TEXT
         self.wb = load_workbook(
-            filename="/run/user/1000/gvfs/smb-share:server=192.168.1.22,share=d/Agent baza/2014 BAZA MAGRO.xlsm",
+            # filename="/run/user/1000/gvfs/smb-share:server=192.168.1.22,share=d/Agent baza/2014 BAZA MAGRO.xlsm",
+            filename="/mnt/magazyn_fujitsu/Agent baza/2014 BAZA MAGRO.xlsm",
             read_only=True)
         # self.wb = load_workbook(filename="/mnt/pipboy_d/Agent baza/2014 BAZA MAGRO.xlsm", read_only=True)
         self.ws = self.wb['BAZA 2014']
